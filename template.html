@@ -1,0 +1,43 @@
+<!-- 
+    templateType: page
+    label: Page Template
+    isAvailableForNewContent: true
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page_meta.html_title }}</title>
+    <meta name="description" content="{{ page_meta.meta_description }}">
+    <link rel="stylesheet" href="{{ get_asset_url('/css/styles.css') }}">
+    {{ standard_header_includes }}
+  </head>
+  <body>
+    {% dnd_area "main-content" 
+    class="main-content-area",
+    label="Main Content Area"
+  %}
+    {% dnd_section %}
+      {% dnd_module "image" path="@hubspot/image", flexbox_positioning="middle_center", 
+        img={{ page.context.default_image | default({"src": "https://via.placeholder.com/300"}) }}
+        offset=0,
+        width=6
+      %}
+      {% end_dnd_module %}
+     
+      
+      {% dnd_module "rich_text" path="@hubspot/rich_text" 
+        html={{ page.context.default_content | default("<p>Default rich text content goes here.</p>") }}
+        offset=6,
+        width=6
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_section %}
+  {% end_dnd_area %}
+
+
+
+  {{ standard_footer_includes }}
+  </body>
+</html>
